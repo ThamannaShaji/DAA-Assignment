@@ -2,30 +2,49 @@
 #include <iostream>
 
 using namespace std;
-
-Stack::Stack(int size)
+template <typename T>
+Stack<T>::Stack(int size)
 {
     this->SIZE = size;
-    this->S = new int[this->SIZE];
+    this->S = new T[this->SIZE];
     this->top = -1;
 }
 
-void Stack::operator+(int item)
+template <typename T>
+void Stack<T>::operator+(T item)
 {
+    if(this->top == this->SIZE - 1)
+    {
+        cout << "Stack Overflow" << endl;
+        return;
+    }
     this->S[++this->top] = item;
 }
 
-void Stack::operator-()
+template <typename T>
+void Stack<T>::operator-()
 {
+    if(this->top == -1)
+    {
+        cout << "Stack Underflow" << endl;
+        return;
+    }
     this->top--;
 }
 
-int Stack::peek()
+template <typename T>
+T Stack<T>::peek()
 {
+    if(this->top == -1)
+    {
+        cout << "Stack is empty" << endl;
+        return T();
+    }
     return this->S[this->top];
 }
 
-void Stack::print_Stack()
+template <typename T>
+void Stack<T>::print_Stack()
 {
     cout << "\nCurrent Stack: ";
     for (int i = 0; i <= this->top; i++)
@@ -34,3 +53,5 @@ void Stack::print_Stack()
     }
     cout << endl;
 }
+
+template class Stack<int>;

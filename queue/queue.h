@@ -1,6 +1,8 @@
+
+template <typename T>
 class Queue
 {
-    int *q;
+    T *q;
     int front;
     int rear;
     int SIZE;
@@ -8,9 +10,8 @@ class Queue
 public:
     Queue(int);
 
-    void operator+(int);
+    void operator+(T);
     void operator-();
-
-    int peek();
+    T peek();
     void print_Queue();
 };

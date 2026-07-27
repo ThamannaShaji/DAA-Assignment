@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-    Stack st(10);
+    Stack<int> st(10);
     st+1;
     st+2;
     st+3;

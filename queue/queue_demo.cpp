@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-    Queue q(10);
+    Queue<int> q(10);
 
     q + 10;
     q + 20;
@@ -13,7 +13,7 @@ int main()
 
     q.print_Queue();
 
-     -q;
+    -q;
 
     q.print_Queue();
 

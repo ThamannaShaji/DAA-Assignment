@@ -1,13 +1,14 @@
+template <typename T>
 class Stack
 {
-    int* S;
+    T* S;
     int top;
     int SIZE;
 
     public:
     Stack(int );
-    void operator+(int );
+    void operator+(T );
     void operator-();
-    int peek();
+    T peek();
     void print_Stack();
 };

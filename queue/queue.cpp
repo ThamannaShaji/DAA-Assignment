@@ -3,15 +3,17 @@
 
 using namespace std;
 
-Queue::Queue(int SIZE)
+template <typename T>
+Queue<T>::Queue(int SIZE)
 {
     this->SIZE = SIZE;
-    this->q = new int[SIZE];
+    this->q = new T[SIZE];
     this->front = -1;
     this->rear = -1;
 }
 
-void Queue::operator+(int item)
+template <typename T>
+void Queue<T>::operator+(T item)
 {
     if(rear == SIZE - 1)
     {
@@ -25,7 +27,8 @@ void Queue::operator+(int item)
     q[++rear] = item;
 }
 
-void Queue::operator-()
+template <typename T>
+void Queue<T>::operator-()
 {
     if(front == -1 || front > rear)
     {
@@ -36,18 +39,20 @@ void Queue::operator-()
     front++;
 }
 
-int Queue::peek()
+template <typename T>
+T Queue<T>::peek()
 {
     if(front == -1 || front > rear)
     {
         cout << "Queue Empty\n";
-        return -1;
+        return T(); 
     }
 
     return q[front];
 }
 
-void Queue::print_Queue()
+template <typename T>
+void Queue<T>::print_Queue()
 {
     if(front == -1 || front > rear)
     {
@@ -60,3 +65,5 @@ void Queue::print_Queue()
     for(int i = front; i <= rear; i++)
         cout << q[i] << " ";
 }
+
+template class Queue<int>;
