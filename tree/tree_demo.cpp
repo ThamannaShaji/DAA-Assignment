@@ -2,7 +2,7 @@
 
 int main()
 {
-    Tree t;
+    Tree<int> t;
 
     t.insert(50);
     t.insert(30);
@@ -12,19 +12,18 @@ int main()
     t.insert(60);
     t.insert(80);
 
-    t.inorder();
+    cout << "Inorder Traversal: ";
+    cout << t;
 
-    t.preorder();
+    if(t.search(60))
+        cout << "60 Found\n";
+    else
+        cout << "60 Not Found\n";
 
-    t.postorder();
-
-    cout<<"\n";
-
-    t.search(40);
-
-    t.deleteNode(30);
-
-    t.inorder();
+    if(t.search(100))
+        cout << "100 Found\n";
+    else
+        cout << "100 Not Found\n";
 
     return 0;
 }
