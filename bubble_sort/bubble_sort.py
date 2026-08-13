@@ -1,51 +1,37 @@
 import random
 import time
-import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib import pyplot as plt
 
-def bubble_sort(arr):
-    n = len(arr)
+etime = []
 
-    for i in range(n - 1):
-        swapped = False
+size = [10, 50, 100, 250, 500, 1000, 2500, 5000]
 
-        for j in range(n - i - 1):
-            if arr[j] > arr[j + 1]:
-                arr[j], arr[j + 1] = arr[j + 1], arr[j]
-                swapped = True
+for s in size:
+    # Generate random data
+    data = np.random.random(s)
 
-        if not swapped:
-            break
+    start_time = time.time()
 
+    # Bubble Sort
+    for i in range(len(data)):
+        for j in range(len(data) - i - 1):
+            if data[j] > data[j + 1]:
+                t = data[j]
+                data[j] = data[j + 1]
+                data[j + 1] = t
 
-sizes = [100, 200, 500, 1000, 2000, 3000]
+    end_time = time.time()
 
-times = []
+    duration = end_time - start_time
+    etime.append(duration * 10e5)
 
-print("Array Size\tExecution Time (seconds)")
+print(size)
+print(etime)
 
-for size in sizes:
-
-    arr = random.sample(range(size * 10), size)
-
-    start = time.perf_counter()
-
-    bubble_sort(arr)
-
-    end = time.perf_counter()
-
-    elapsed = end - start
-
-    times.append(elapsed)
-
-    print(f"{size}\t\t{elapsed:.6f}")
-
-
-plt.figure(figsize=(8, 5))
-plt.plot(sizes, times, marker='o', linewidth=2)
-
+plt.plot(size, etime, marker='o')
+plt.xlabel("Input Size")
+plt.ylabel("Execution Time")
 plt.title("Bubble Sort Time Complexity")
-plt.xlabel("Array Size")
-plt.ylabel("Execution Time (seconds)")
 plt.grid(True)
-
 plt.show()
