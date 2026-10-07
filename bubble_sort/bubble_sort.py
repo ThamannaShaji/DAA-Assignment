@@ -8,12 +8,10 @@ etime = []
 size = [10, 50, 100, 250, 500, 1000, 2500, 5000]
 
 for s in size:
-    # Generate random data
     data = np.random.random(s)
 
     start_time = time.time()
 
-    # Bubble Sort
     for i in range(len(data)):
         for j in range(len(data) - i - 1):
             if data[j] > data[j + 1]:
