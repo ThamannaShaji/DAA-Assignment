@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 
-// Node Class
+
 template <class T>
 class Node
 {
@@ -20,14 +20,14 @@ public:
     }
 };
 
-// Tree Class
+
 template <class T>
 class Tree
 {
 private:
     Node<T> *root;
 
-    // Recursive Insert
+   
     Node<T>* insert(Node<T>* node, T value)
     {
         if (node == NULL)
@@ -41,7 +41,7 @@ private:
         return node;
     }
 
-    // Recursive Inorder Traversal
+  
     void inorder(Node<T>* node)
     {
         if (node == NULL)
@@ -52,7 +52,6 @@ private:
         inorder(node->right);
     }
 
-    // Recursive Search
     bool search(Node<T>* node, T key)
     {
         if (node == NULL)
@@ -68,32 +67,27 @@ private:
     }
 
 public:
-    // Constructor
     Tree()
     {
         root = NULL;
     }
 
-    // Insert Function
     void insert(T value)
     {
         root = insert(root, value);
     }
 
-    // Display Inorder
     void display()
     {
         inorder(root);
         cout << endl;
     }
 
-    // Search Function
     bool search(T key)
     {
         return search(root, key);
     }
 
-    // Operator Overloading
     friend ostream& operator<<(ostream &out, Tree<T> &t)
     {
         t.display();
