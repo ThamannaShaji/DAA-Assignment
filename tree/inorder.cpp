@@ -3,38 +3,48 @@ using namespace std;
 
 struct Node {
     int data;
-    Node* left;
-    Node* right;
+    Node *left, *right;
 };
 
-Node* createNode(int value) {
-    Node* newNode = new Node();
-    newNode->data = value;
-    newNode->left = nullptr;
-    newNode->right = nullptr;
-
-    return newNode;
+Node *createTree() {
+    int value;
+    cout << "Enter node value (-1 for no node): ";
+    cin >> value;
+    if (value == -1)
+        return NULL;
+    Node *p = new Node;
+    p->data = value;
+    cout << "Left child of " << value << endl;
+    p->left = createTree();
+    cout << "Right child of " << value << endl;
+    p->right = createTree();
+    return p;
 }
 
-void inorder(Node* root) {
-    if (root != nullptr) {
-        inorder(root->left);
-        cout << root->data << " ";
-        inorder(root->right);
-    }
+void inorder(Node *p) {
+    if (p == NULL)
+        return;
+
+
+
+
+
+
+      inorder(p->left);
+      cout << p->data << " ";
+      inorder(p->right);
 }
 
 int main() {
-    Node* root = createNode(1);
-
-    root->left = createNode(2);
-    root->right = createNode(3);
-
-    root->left->left = createNode(4);
-    root->left->right = createNode(5);
-
-    cout << "In-order traversal: ";
-    inorder(root);
-
+    Node *root;
+    cout << "Enter the root node\n";
+    root = createTree();
+    if (root == NULL)
+        cout << "Tree is empty.\n";
+    else {
+        cout << "Inorder traversal : ";
+        inorder(root);
+        cout << endl;
+    }
     return 0;
 }

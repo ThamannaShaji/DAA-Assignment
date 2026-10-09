@@ -1,50 +1,57 @@
 #include <iostream>
 using namespace std;
 
-void merge(int a[], int l, int m, int r) {
-    int temp[100];
-    int i = l, j = m + 1, k = 0;
+int arr[100], n;
 
-    while(i <= m && j <= r) {
-        if(a[i] < a[j])
-            temp[k++] = a[i++];
+void merge(int low, int mid, int high) {
+    int temp[100];
+    int i = low, j = mid + 1, k = 0;
+    while (i <= mid && j <= high) {
+        if (arr[i] <= arr[j])
+             temp[k++] = arr[i++];
         else
-            temp[k++] = a[j++];
+             temp[k++] = arr[j++];
     }
 
-    while(i <= m)
-        temp[k++] = a[i++];
 
-    while(j <= r)
-        temp[k++] = a[j++];
 
-    for(i = l, k = 0; i <= r; i++, k++)
-        a[i] = temp[k];
+
+
+
+      while (i <= mid)
+          temp[k++] = arr[i++];
+      while (j <= high)
+          temp[k++] = arr[j++];
+      for (i = low, k = 0; i <= high; i++, k++)
+          arr[i] = temp[k];
 }
 
-void mergeSort(int a[], int l, int r) {
-    if(l < r) {
-        int m = (l + r) / 2;
-
-        mergeSort(a, l, m);
-        mergeSort(a, m + 1, r);
-
-        merge(a, l, m, r);
+void mergeSort(int low, int high) {
+    if (low < high) {
+        int mid = (low + high) / 2;
+        mergeSort(low, mid);
+        mergeSort(mid + 1, high);
+        merge(low, mid, high);
     }
+}
+
+void display() {
+    for (int i = 0; i < n; i++)
+        cout << arr[i] << " ";
+    cout << endl;
 }
 
 int main() {
-    int n, a[100];
-
+    cout << "Enter number of elements: ";
     cin >> n;
+    cout << "Enter " << n << " elements: ";
+    for (int i = 0; i < n; i++)
+        cin >> arr[i];
 
-    for(int i = 0; i < n; i++)
-        cin >> a[i];
-
-    mergeSort(a, 0, n - 1);
-
-    for(int i = 0; i < n; i++)
-        cout << a[i] << " ";
-
-    return 0;
+      cout << "Before sorting: ";
+      display();
+      mergeSort(0, n - 1);
+      cout << "After sorting : ";
+      display();
+      return 0;
 }

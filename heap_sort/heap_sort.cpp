@@ -1,54 +1,61 @@
 #include <iostream>
 using namespace std;
 
-void heapify(int a[], int n, int i) {
+int arr[100], n;
+
+void heapify(int size, int i) {
     int largest = i;
     int left = 2 * i + 1;
     int right = 2 * i + 2;
-
-    if (left < n && a[left] > a[largest])
+    int temp;
+    if (left < size && arr[left] > arr[largest])
         largest = left;
-
-    if (right < n && a[right] > a[largest])
+    if (right < size && arr[right] > arr[largest])
         largest = right;
-
     if (largest != i) {
-        int temp = a[i];
-        a[i] = a[largest];
-        a[largest] = temp;
 
-        heapify(a, n, largest);
+
+
+
+
+
+
+              temp = arr[i];
+              arr[i] = arr[largest];
+              arr[largest] = temp;
+              heapify(size, largest);
+      }
+}
+
+void heapSort() {
+    int temp;
+    for (int i = n / 2 - 1; i >= 0; i--)
+        heapify(n, i);
+    for (int i = n - 1; i > 0; i--) {
+        temp = arr[0];
+        arr[0] = arr[i];
+        arr[i] = temp;
+        heapify(i, 0);
     }
 }
 
-void heapSort(int a[], int n) {
-    for (int i = n / 2 - 1; i >= 0; i--)
-        heapify(a, n, i);
-
-    for (int i = n - 1; i > 0; i--) {
-        int temp = a[0];
-        a[0] = a[i];
-        a[i] = temp;
-
-        heapify(a, i, 0);
-    }
+void display() {
+    for (int i = 0; i < n; i++)
+        cout << arr[i] << " ";
+    cout << endl;
 }
 
 int main() {
-    int n, a[100];
-
     cout << "Enter number of elements: ";
     cin >> n;
-
-    cout << "Enter elements: ";
+    cout << "Enter " << n << " elements: ";
     for (int i = 0; i < n; i++)
-        cin >> a[i];
+        cin >> arr[i];
 
-    heapSort(a, n);
-
-    cout << "Sorted array: ";
-    for (int i = 0; i < n; i++)
-        cout << a[i] << " ";
-
-    return 0;
+      cout << "Before sorting: ";
+      display();
+      heapSort();
+      cout << "After sorting : ";
+      display();
+      return 0;
 }

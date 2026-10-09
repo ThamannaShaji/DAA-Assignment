@@ -1,50 +1,68 @@
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
+#define INF 9999
+
 int main() {
-    int n;
+    int n, e, u, v, w;
+    int dist[20][20];
 
-    cout << "Enter number of vertices: ";
+    cout << "Enter number of vertices (1 to 20): ";
     cin >> n;
-
-    int distance[100][100];
-
-    cout << "Enter adjacency matrix:" << endl;
-    cout << "Use 99999 for infinity." << endl;
-
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            cin >> distance[i][j];
-        }
-    }
+            if (i == j)
+                dist[i][j] = 0;
 
-    for (int k = 0; k < n; k++) {
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
 
-                if (distance[i][k] != 99999 &&
-                    distance[k][j] != 99999 &&
-                    distance[i][k] + distance[k][j] < distance[i][j]) {
 
-                    distance[i][j] =
-                        distance[i][k] + distance[k][j];
-                }
-            }
-        }
-    }
 
-    cout << "Shortest distance matrix:" << endl;
 
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (distance[i][j] == 99999)
-                cout << "INF ";
-            else
-                cout << distance[i][j] << " ";
-        }
 
-        cout << endl;
-    }
+              else
+                  dist[i][j] = INF;
+          }
+      }
+      cout << "Enter number of edges: ";
+      cin >> e;
+      for (int i = 1; i <= e; i++) {
+          cout << "Edge " << i << " (from to weight): ";
+          cin >> u >> v >> w;
+          dist[u][v] = w;
+      }
 
-    return 0;
+      for (int k = 0; k < n; k++) {
+          for (int i = 0; i < n; i++) {
+              for (int j = 0; j < n; j++) {
+                  if (dist[i][k] != INF && dist[k][j] != INF) {
+                      if (dist[i][k] + dist[k][j] < dist[i][j])
+                          dist[i][j] = dist[i][k] + dist[k][j];
+                  }
+              }
+          }
+          for (int i = 0; i < n; i++) {
+              if (dist[i][i] < 0) {
+                  cout << "Graph contains a negative weight cycle.\n";
+                  return 0;
+              }
+          }
+      }
+
+      cout << "Shortest distance matrix:\n";
+      cout << "      ";
+      for (int j = 0; j < n; j++)
+          cout << setw(5) << j;
+      cout << endl;
+      for (int i = 0; i < n; i++) {
+          cout << setw(5) << i;
+          for (int j = 0; j < n; j++) {
+              if (dist[i][j] == INF)
+                   cout << setw(5) << "INF";
+              else
+                   cout << setw(5) << dist[i][j];
+          }
+          cout << endl;
+      }
+      return 0;
 }

@@ -1,53 +1,46 @@
 #include <iostream>
-#include <queue>
 using namespace std;
 
-int main() {
-    int n, edges;
+int adj[20][20], visited[20], n;
 
-    cout << "Enter number of vertices: ";
-    cin >> n;
-
-    int graph[100][100] = {0};
-
-    cout << "Enter number of edges: ";
-    cin >> edges;
-
-    cout << "Enter edges: " << endl;
-
-    for (int i = 0; i < edges; i++) {
-        int u, v;
-        cin >> u >> v;
-
-        graph[u][v] = 1;
-        graph[v][u] = 1;
-    }
-
-    int start;
-    cout << "Enter starting vertex: ";
-    cin >> start;
-
-    bool visited[100] = {false};
-    queue<int> q;
-
-    visited[start] = true;
-    q.push(start);
-
-    cout << "BFS Traversal: ";
-
-    while (!q.empty()) {
-        int current = q.front();
-        q.pop();
-
-        cout << current << " ";
-
+void bfs(int start) {
+    int q[20], front = 0, rear = 0;
+    visited[start] = 1;
+    q[rear++] = start;
+    cout << "BFS traversal: ";
+    while (front < rear) {
+        int v = q[front++];
+        cout << v << " ";
         for (int i = 0; i < n; i++) {
-            if (graph[current][i] && !visited[i]) {
-                visited[i] = true;
-                q.push(i);
+            if (adj[v][i] == 1 && visited[i] == 0) {
+                visited[i] = 1;
+                q[rear++] = i;
             }
         }
     }
+    cout << endl;
+}
 
-    return 0;
+int main() {
+    int e, u, v, start;
+    cout << "Enter number of vertices (1 to 20): ";
+    cin >> n;
+
+
+
+
+
+
+      cout << "Enter number of edges: ";
+      cin >> e;
+      for (int i = 1; i <= e; i++) {
+          cout << "Edge " << i << " (u v): ";
+          cin >> u >> v;
+          adj[u][v] = 1;
+          adj[v][u] = 1;
+      }
+      cout << "Enter starting vertex: ";
+      cin >> start;
+      bfs(start);
+      return 0;
 }
